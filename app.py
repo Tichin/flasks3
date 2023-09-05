@@ -51,7 +51,7 @@ def home():
     #     print("F: ", f)
     #     s3.upload_fileobj(f, "flasks3-test", "files/")
 
-    s3.upload_file("testupload.txt", 'flasks3-test', "testuploads/testupload3")
+    s3.upload_file("testupload.txt", 'flasks3-test', "photos/testupload")
 
     return render_template("index.html")
 
