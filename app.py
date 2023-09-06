@@ -11,6 +11,9 @@ from models import db, connect_db, File
 
 app = Flask(__name__)
 
+# os.environ['MY_BUCKET'] = "flasks3-test"
+print(os.environ['MY_BUCKET'])
+
 BUCKET_BASE_URL = "https://flasks3-test.s3.us-west-1.amazonaws.com/photos/"
 # For Didi
 # BUCKET_BASE_URL = "https://flasks3-test1.s3.us-west-1.amazonaws.com/photos/"
