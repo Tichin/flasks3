@@ -11,12 +11,9 @@ from models import db, connect_db, File
 
 app = Flask(__name__)
 
-# os.environ['MY_BUCKET'] = "flasks3-test"
-print(os.environ['MY_BUCKET'])
+BUCKET = os.environ['MY_BUCKET']
 
-BUCKET_BASE_URL = "https://flasks3-test.s3.us-west-1.amazonaws.com/photos/"
-# For Didi
-# BUCKET_BASE_URL = "https://flasks3-test1.s3.us-west-1.amazonaws.com/photos/"
+BUCKET_BASE_URL = f"https://{BUCKET}.s3.us-west-1.amazonaws.com/photos/"
 
 # app.config['SECRET_KEY'] = "secret"
 
@@ -57,13 +54,7 @@ def home():
     #     print("F: ", f)
     #     s3.upload_fileobj(f, "flasks3-test", "files/")
 
-    s3.upload_file("kitten.jpeg", 'flasks3-test', "photos/kitten")
-
-    # Didi
-    # s3.upload_file("kitten.jpeg", 'flasks3-test1', "photos/kitten")
-
-    # Didi
-    # s3.upload_file("kitten.jpeg", 'flasks3-test1', "photos/kitten")
+    s3.upload_file("kitten.jpeg", f'{BUCKET}', "photos/kitten")
 
     # BUCKET_BASE_URL + {file_name}
     newFile = File(image_url=f'{BUCKET_BASE_URL}kitten')
@@ -72,6 +63,3 @@ def home():
     db.session.commit()
 
     return render_template("index.html")
-
-
-# print(testupload.txt)
