@@ -11,6 +11,8 @@ from models import db, connect_db
 
 app = Flask(__name__)
 
+BUCKET_BASE_URL = "https://flasks3-test.s3.us-west-1.amazonaws.com/photos/"
+
 # app.config['SECRET_KEY'] = "secret"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
@@ -51,7 +53,9 @@ def home():
     #     print("F: ", f)
     #     s3.upload_fileobj(f, "flasks3-test", "files/")
 
-    s3.upload_file("testupload.txt", 'flasks3-test', "photos/testupload")
+    s3.upload_file("kitten.jpeg", 'flasks3-test', "photos/kitten")
+
+    # BUCKET_BASE_URL + {file_name}
 
     return render_template("index.html")
 
