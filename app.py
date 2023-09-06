@@ -7,11 +7,13 @@ from botocore.exceptions import ClientError
 from flask import Flask, render_template
 # from flask_sqlalchemy import SQLAlchemy
 
-from models import db, connect_db
+from models import db, connect_db, File
 
 app = Flask(__name__)
 
 BUCKET_BASE_URL = "https://flasks3-test.s3.us-west-1.amazonaws.com/photos/"
+# For Didi
+# BUCKET_BASE_URL = "https://flasks3-test1.s3.us-west-1.amazonaws.com/photos/"
 
 # app.config['SECRET_KEY'] = "secret"
 
@@ -47,7 +49,6 @@ def home():
             return False
         return True
 
-
     s3 = boto3.client('s3')
     # with open("testupload.txt", "rb") as f:
     #     print("F: ", f)
@@ -55,11 +56,19 @@ def home():
 
     s3.upload_file("kitten.jpeg", 'flasks3-test', "photos/kitten")
 
+    # Didi
+    # s3.upload_file("kitten.jpeg", 'flasks3-test1', "photos/kitten")
+
+    # Didi
+    # s3.upload_file("kitten.jpeg", 'flasks3-test1', "photos/kitten")
+
     # BUCKET_BASE_URL + {file_name}
+    newFile = File(image_url=f'{BUCKET_BASE_URL}kitten')
+
+    db.session.add(newFile)
+    db.session.commit()
 
     return render_template("index.html")
-
-
 
 
 # print(testupload.txt)

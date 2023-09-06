@@ -4,6 +4,7 @@ GENERIC_IMAGE = "https://mylostpetalert.com/wp-content/themes/mlpa-child/images/
 
 db = SQLAlchemy()
 
+
 class File(db.Model):
 
     __tablename__ = "files"
@@ -11,6 +12,11 @@ class File(db.Model):
     id = db.Column(
         db.Integer,
         primary_key=True)
+
+    image_url = db.Column(
+        db.Text()
+    )
+
 
 def connect_db(app):
     """Connect this database to provided Flask app.
